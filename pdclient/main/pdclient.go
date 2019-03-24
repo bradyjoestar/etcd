@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"go.etcd.io/etcd/clientv3"
 	"go.etcd.io/etcd/etcdserver/etcdserverpb"
+	"go.etcd.io/etcd/pdclient"
 	"google.golang.org/grpc"
 	"log"
 	"math"
@@ -29,8 +30,10 @@ func main() {
 		grpc.MaxCallRecvMsgSize(math.MaxInt32),
 	})
 
+	pdwatcher := pb.NewPDWatcher(watcher)
+
 	for{
-		rch := watcher.Watch(context.Background(), "mykey")
+		rch := pdwatcher.Watch(context.Background(), "mykey")
 		for wresp := range rch {
 			fmt.Println(wresp.Header)
 			fmt.Println("we have receive new event")

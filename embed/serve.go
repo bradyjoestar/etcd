@@ -19,6 +19,7 @@ import (
 	"fmt"
 	"github.com/prometheus/common/log"
 	"go.etcd.io/etcd/etcdserver/etcdserverpb"
+	"go.etcd.io/etcd/pdclient"
 	"io/ioutil"
 	defaultLog "log"
 	"net"
@@ -104,7 +105,7 @@ func (sctx *serveCtx) serve(
 			log.Fatalf("failed to listen: %v", err)
 		}
 		grpcserver := grpc.NewServer()
-		etcdserverpb.RegisterWatchServer(grpcserver, v3rpc.NewWatchServer(s))
+		etcdserverpb.RegisterWatchServer(grpcserver, pb.NewPDWatchServer(v3rpc.NewWatchServer(s)))
 		plog.Info("ready to start pd watch server")
 
 		if err := grpcserver.Serve(lis); err != nil {
