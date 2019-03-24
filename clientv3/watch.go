@@ -246,6 +246,15 @@ func NewWatchFromWatchClient(wc pb.WatchClient, c *Client) Watcher {
 	return w
 }
 
+func NewWatcherFromCallOption(wc pb.WatchClient,co []grpc.CallOption) Watcher {
+	w := &watcher{
+		remote:  wc,
+		streams: make(map[string]*watchGrpcStream),
+		callOpts: co,
+	}
+	return w
+}
+
 // never closes
 var valCtxCh = make(chan struct{})
 var zeroTime = time.Unix(0, 0)

@@ -1,6 +1,8 @@
 module go.etcd.io/etcd
 
 require (
+	github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc // indirect
+	github.com/alecthomas/units v0.0.0-20151022065526-2efee857e7cf // indirect
 	github.com/beorn7/perks v0.0.0-20180321164747-3a771d992973 // indirect
 	github.com/bgentry/speakeasy v0.1.0
 	github.com/coreos/go-semver v0.2.0
@@ -55,6 +57,7 @@ require (
 	google.golang.org/genproto v0.0.0-20180608181217-32ee49c4dd80 // indirect
 	google.golang.org/grpc v1.14.0
 	gopkg.in/airbrake/gobrake.v2 v2.0.9 // indirect
+	gopkg.in/alecthomas/kingpin.v2 v2.2.6 // indirect
 	gopkg.in/cheggaaa/pb.v1 v1.0.25
 	gopkg.in/gemnasium/logrus-airbrake-hook.v2 v2.1.2 // indirect
 	gopkg.in/yaml.v2 v2.2.2

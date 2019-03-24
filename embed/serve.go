@@ -17,6 +17,8 @@ package embed
 import (
 	"context"
 	"fmt"
+	"github.com/prometheus/common/log"
+	"go.etcd.io/etcd/etcdserver/etcdserverpb"
 	"io/ioutil"
 	defaultLog "log"
 	"net"
@@ -94,6 +96,21 @@ func (sctx *serveCtx) serve(
 	if sctx.lg == nil {
 		plog.Info("ready to serve client requests")
 	}
+
+	//start watch server
+	go func() {
+		lis, err := net.Listen("tcp", "localhost:28080")
+		if err != nil {
+			log.Fatalf("failed to listen: %v", err)
+		}
+		grpcserver := grpc.NewServer()
+		etcdserverpb.RegisterWatchServer(grpcserver, v3rpc.NewWatchServer(s))
+		plog.Info("ready to start pd watch server")
+
+		if err := grpcserver.Serve(lis); err != nil {
+			plog.Error("failed to start pd watch server")
+		}
+	}()
 
 	m := cmux.New(sctx.l)
 	v3c := v3client.New(s)
