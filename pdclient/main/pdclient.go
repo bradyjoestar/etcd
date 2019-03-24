@@ -22,7 +22,6 @@ func main() {
 	defer conn.Close()
 
 	watchClient := etcdserverpb.NewWatchClient(conn)
-	fmt.Println("watchclient success")
 
 	watcher := clientv3.NewWatcherWithCallOption(watchClient,[]grpc.CallOption{
 		grpc.FailFast(false),

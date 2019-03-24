@@ -6,6 +6,6 @@ type PDWatcher struct {
 	clientv3.Watcher
 }
 
-func NewPDWatcher(watcher clientv3.Watcher) *PDWatcher{
-	return &PDWatcher{watcher}
+func NewPDWatcher(watcher clientv3.Watcher) PDWatcher{
+	return PDWatcher{watcher}
 }
