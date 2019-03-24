@@ -4,9 +4,6 @@ package pb;
 
 import "gogoproto/gogo.proto";
 import "etcd/etcdserver/etcdserverpb/rpc.proto";
-import "etcd/mvcc/mvccpb/kv.proto";
-import "etcd/auth/authpb/auth.proto";
-import "google/api/annotations.proto";
 
 option (gogoproto.marshaler_all) = true;
 option (gogoproto.sizer_all) = true;
