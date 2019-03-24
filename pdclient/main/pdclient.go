@@ -24,7 +24,7 @@ func main() {
 	watchClient := etcdserverpb.NewWatchClient(conn)
 	fmt.Println("watchclient success")
 
-	watcher := clientv3.NewWatcherFromCallOption(watchClient,[]grpc.CallOption{
+	watcher := clientv3.NewWatcherWithCallOption(watchClient,[]grpc.CallOption{
 		grpc.FailFast(false),
 		grpc.MaxCallSendMsgSize(2 * 1024 * 1024),
 		grpc.MaxCallRecvMsgSize(math.MaxInt32),

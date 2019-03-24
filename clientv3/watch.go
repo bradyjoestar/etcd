@@ -246,7 +246,7 @@ func NewWatchFromWatchClient(wc pb.WatchClient, c *Client) Watcher {
 	return w
 }
 
-func NewWatcherFromCallOption(wc pb.WatchClient,co []grpc.CallOption) Watcher {
+func NewWatcherWithCallOption(wc pb.WatchClient,co []grpc.CallOption) Watcher {
 	w := &watcher{
 		remote:  wc,
 		streams: make(map[string]*watchGrpcStream),
